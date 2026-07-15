@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/a0ac53801d.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <section id="landing">
+        <nav>
+            <div class="nav__container">
+                <img class="logo" src="logo_wiki.png" alt="">
+                <ul class="nav__links">
+                    <li><a href="#" class="nav__link">Home</a></li>
+                    <li><a href="#" class="nav__link">Contact</a></li>
+                    <li><a href="#" class="nav__link nav__link--primary">Movies</a></li>
+                </ul>
+                <button class="btn__menu" onclick="openMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="menu__backdrop">
+                    <button class="btn__menu btn__menu--close" onclick="closeMenu()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <ul class="menu__links">
+                        <li class="menu__list">
+                            <a href="#" class="menu__link" onclick="closeMenu()">Home</a>
+                        </li>
+                        <li class="menu__list">
+                            <a href="#" class="menu__link" onclick="closeMenu()">Movies</a>
+                        </li>
+                        <li class="menu__list">
+                            <a class="menu__link no-cursor" onclick="closeMenu()">Contacts</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </section>
+    <section id="search">
+        <div class="container">
+            <div class="row">
+                <h1>Most Trusted Movie Search & Filter</span></h1>
+                <h2>FIND YOUR MOVIE WITH <span class="purple">MOVIE WIKI</span></h2>
+                <div class="searchBar">
+                    <input type="text" class="searchBar--input" placeholder="Search by Title" fdprocessedid="3sn6f7" onchange="onSearchChange(event)">
+                    <button data-v-2a11e7ca="" class="not-loading" fdprocessedid="5ikikh">
+                        <svg data-v-2a11e7ca="" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="svg-inline--fa fa-search fa-w-16">
+                            <path data-v-2a11e7ca="" fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z" class="">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="result">
+        <div class="container">
+            <div class="row">
+                <div class="movie-list">
+                    <div class="movie">
+                        <div class="movie-poster">
+                            Poster
+                        </div>
+                        <div class="movie-title">
+                            Title
+                        </div>
+                        <div class="movie-year">
+                            Year
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="container">
+            <div class="row row__column">
+                <div class="footer__list">
+                    <a href="#" class="footer__link">Home</a>
+                    <a class="footer__link no-cursor">About</a>
+                    <a href="#" class="footer__link">Movies</a>
+                    <a class="footer__link no-cursor">Contact</a>
+                </div>
+                <div class="footer__copyright">Copyright &copy; 2026 Library</div>
+            </div>
+        </div>
+    </footer>
+</body>
+<script src="index.js"></script>
+</html>
