@@ -15,6 +15,9 @@ function closeMenu() {
 const movieListEl = document.querySelector(".movie-list");
 const searchInput = document.querySelector(".searchBar--input");
 const searchButton = document.querySelector(".searchBar button");
+const loading = document.querySelector('.modal__overlay--loading');
+const sortSelect = document.getElementById("sortSelect");
+let currentMovies = [];
 
 // ============================================================
 // 3. SEARCH TRIGGERS (Button click, Enter key, onchange)
@@ -44,6 +47,7 @@ async function onSearchChange(event) {
 // 4. FETCH & RENDER
 // ============================================================
 async function renderPosts(searchTerm) {
+  loading.classList += " modal__overlay--visible";
   try {
     // Show loading state
     movieListEl.innerHTML = `<div class="loading">Searching for "${searchTerm}"...</div>`;
@@ -55,23 +59,68 @@ async function renderPosts(searchTerm) {
 
     // OMDb returns { Search: [...], totalResults: "...", Response: "True/False" }
     if (postsData.Response === "False") {
+      loading.classList.remove("modal__overlay--visible");
       movieListEl.innerHTML = `<div class="no-results">❌ No movies found for "${searchTerm}"</div>`;
       return;
     }
 
-    const movies = postsData.Search || [];
-    if (movies.length === 0) {
+    currentMovies = postsData.Search || [];
+    if (currentMovies.length === 0) {
+      loading.classList.remove("modal__overlay--visible");
       movieListEl.innerHTML = `<div class="no-results">No movies found for "${searchTerm}"</div>`;
       return;
     }
 
     // Build HTML for each movie and insert
-    movieListEl.innerHTML = movies.map((movie) => postHTML(movie)).join("");
+    const sortedMovies = sortMovies(currentMovies);
+    movieListEl.innerHTML = sortedMovies.map(movie => postHTML(movie)).join("");
+
+    loading.classList.remove("modal__overlay--visible");
   } catch (error) {
+    loading.classList.remove("modal__overlay--visible");
     console.error("Fetch error:", error);
     movieListEl.innerHTML = `<div class="error">⚠️ Failed to load movies. Please try again.</div>`;
   }
 }
+
+function sortMovies(currentMovies) {
+    const sorted = [...currentMovies];
+
+    switch (sortSelect.value) {
+
+        case "newest":
+            sorted.sort((a, b) => Number(b.Year) - Number(a.Year));
+            break;
+
+        case "oldest":
+            sorted.sort((a, b) => Number(a.Year) - Number(b.Year));
+            break;
+
+        case "az":
+            sorted.sort((a, b) => a.Title.localeCompare(b.Title));
+            break;
+
+        case "za":
+            sorted.sort((a, b) => b.Title.localeCompare(a.Title));
+            break;
+
+        default:
+            break;
+    }
+
+    return sorted;
+}
+
+sortSelect.addEventListener("change", () => {
+
+    if (currentMovies.length === 0) return;
+
+    const sortedMovies = sortMovies(currentMovies);
+
+    movieListEl.innerHTML = sortedMovies
+        .map(movie => postHTML(movie))
+        .join("");
+});
 
 // ============================================================
 // 5. MOVIE CARD HTML
